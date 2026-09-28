@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ratio Rush — Kuis Rasio Kelas 7</title>
+<style>
+:root{
+  --bg:#08111f;--panel:#111c2f;--panel2:#17243a;--line:#273954;--text:#eef5ff;--muted:#9fb3cb;
+  --blue:#5aa9ff;--purple:#9d7bff;--green:#58d68d;--red:#ff6b7a;--yellow:#ffd166;--cyan:#56e0d2;
+  --shadow:0 16px 40px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:
+radial-gradient(circle at 10% 10%,rgba(90,169,255,.16),transparent 28%),
+radial-gradient(circle at 90% 15%,rgba(157,123,255,.14),transparent 26%),var(--bg);color:var(--text);min-height:100vh}
+button,input{font:inherit}.app{max-width:1180px;margin:auto;padding:24px}.card{background:linear-gradient(180deg,rgba(23,36,58,.94),rgba(13,24,41,.96));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+.hidden{display:none!important}.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#102139;border:1px solid #274363;color:#b8d8ff;font-size:13px;font-weight:700}
+.hero{min-height:calc(100vh - 48px);display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center;padding:42px}.hero h1{font-size:clamp(42px,6vw,76px);line-height:.95;margin:18px 0;background:linear-gradient(90deg,#fff,#8bc5ff,#b9a5ff);-webkit-background-clip:text;color:transparent}.hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:760px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}.stat{background:#0d1a2e;border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center}.stat b{font-size:26px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.startbox{padding:24px}.startbox h3{margin-top:0}.name{width:100%;padding:14px 16px;border-radius:14px;border:1px solid #385170;background:#0b1728;color:#fff;outline:none}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:800;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#07111f}.btn.secondary{background:#17263b;color:#d7e8ff;border:1px solid #34506f}.btn.success{background:var(--green);color:#072014}.btn.warn{background:#342a16;color:#ffd778;border:1px solid #6f5620}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.quiz-top{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-bottom:16px}.progressWrap{background:#0a1424;border:1px solid var(--line);border-radius:16px;padding:14px}.progressMeta{display:flex;justify-content:space-between;color:#bcd0e8;font-size:13px;margin-bottom:8px}.bar{height:10px;border-radius:999px;background:#172338;overflow:hidden}.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--purple));transition:.35s}.timer{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 100%,#223149 0);position:relative}.timer:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#0c1727}.timer span{position:relative;z-index:2;font-size:25px;font-weight:900}.timer small{display:block;font-size:9px;color:var(--muted);font-weight:700;text-align:center}
+.quiz-grid{display:grid;grid-template-columns:220px 1fr;gap:16px}.map{padding:16px;position:sticky;top:16px;height:fit-content}.map h4{margin:0 0 12px}.qmap{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.qdot{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;background:#101d31;border:1px solid #2d4462;color:#9cb3cc;font-size:12px;font-weight:800;cursor:pointer}.qdot.current{outline:2px solid var(--blue);color:#fff}.qdot.correct{background:#123829;border-color:#2b8d61;color:#8ff0ba}.qdot.wrong{background:#3e1820;border-color:#9b3f50;color:#ffb1bd}.qdot.unanswered{background:#3b3118;border-color:#88702f;color:#ffe39a}
+.question{padding:26px}.qhead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.topic{color:#92b9e8;font-size:13px;font-weight:800}.level{font-size:12px;padding:6px 10px;border-radius:999px;background:#101d31;border:1px solid #2d4462}.qtext{font-size:clamp(22px,3vw,34px);line-height:1.25;margin:12px 0 18px;font-weight:850}.visual{background:#0b1627;border:1px dashed #36506f;border-radius:18px;padding:18px;margin-bottom:18px;min-height:70px}.ratio-bars{display:flex;gap:10px;align-items:flex-end;min-height:78px}.ratio-bars .group{display:flex;gap:4px;align-items:flex-end}.block{width:28px;border-radius:7px 7px 4px 4px;background:linear-gradient(180deg,#6bb8ff,#347fd1);border:1px solid #7bc1ff}.block.alt{background:linear-gradient(180deg,#ae91ff,#7457d2);border-color:#bda8ff}.vtable{width:100%;border-collapse:collapse;text-align:center}.vtable th,.vtable td{padding:9px;border:1px solid #2b405d}.vtable th{background:#13243a;color:#b9d7fa}.scale-line{display:flex;align-items:center;gap:12px}.road{height:12px;flex:1;border-radius:999px;background:repeating-linear-gradient(90deg,#5ca8ff 0 38px,#14263d 38px 48px)}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.opt{padding:15px;border-radius:16px;background:#101c2f;border:1px solid #2e4564;color:#eaf3ff;cursor:pointer;text-align:left;display:flex;gap:10px;align-items:flex-start;min-height:58px}.opt:hover{border-color:#5a86b8}.opt.selected{border-color:var(--blue);background:#132a46}.opt.correct{border-color:#38b478;background:#123627}.opt.wrong{border-color:#d95568;background:#3a1720}.badge{min-width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#1a2c46;font-weight:900}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.feedback{margin-top:18px;padding:18px;border-radius:18px;background:#0b1728;border:1px solid #2d4462}.feedback.good{border-color:#2f805c}.feedback.bad{border-color:#8c3b4a}.feedback h4{margin:0 0 8px}.feedback p{margin:0;color:#c7d6e8;line-height:1.55}.explain{margin-top:10px;padding-top:10px;border-top:1px solid #263a55;color:#d5e7fb}.formula{display:inline-block;padding:4px 8px;background:#10223a;border-radius:8px;color:#9ed0ff;font-weight:800}
+.result{padding:32px}.result h2{font-size:36px;margin:0 0 8px}.scoreRing{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) 0%,#1c2c43 0);margin:auto;position:relative}.scoreRing:after{content:"";position:absolute;inset:13px;background:#0c1727;border-radius:50%}.scoreRing div{position:relative;z-index:2;text-align:center}.scoreRing b{font-size:38px}.scoreGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}.scoreCard{padding:18px;border-radius:18px;background:#0d1a2e;border:1px solid var(--line);text-align:center}.scoreCard b{display:block;font-size:26px}.scoreCard span{font-size:12px;color:var(--muted)}.topicRows{display:grid;gap:10px}.topicRow{display:grid;grid-template-columns:180px 1fr 60px;gap:10px;align-items:center}.miniBar{height:10px;background:#18273d;border-radius:999px;overflow:hidden}.miniBar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--blue));border-radius:999px}.review{margin-top:24px}.reviewItem{padding:16px;margin:10px 0;background:#0d1a2e;border:1px solid var(--line);border-radius:16px}.reviewItem b{color:#fff}.reviewItem small{display:block;color:var(--muted);margin-top:6px;line-height:1.5}
+.toast{position:fixed;right:18px;bottom:18px;padding:12px 16px;background:#12243b;border:1px solid #3a5b7f;border-radius:14px;color:#eaf4ff;box-shadow:var(--shadow);z-index:10;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:none}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding:24px}.stats{grid-template-columns:1fr 1fr}.quiz-grid{grid-template-columns:1fr}.map{position:static}.qmap{grid-template-columns:repeat(10,1fr)}.options{grid-template-columns:1fr}.scoreGrid{grid-template-columns:1fr 1fr}.topicRow{grid-template-columns:120px 1fr 48px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section id="start" class="card hero">
+    <div>
+      <span class="pill">⚡ Lesson Review · Kelas 7</span>
+      <h1>RATIO<br>RUSH</h1>
+      <p>Kuis interaktif 40 soal untuk review <b>rasio dan perbandingan</b>: konsep, soal cerita, perbandingan senilai & berbalik nilai, skala, serta laju satuan. Waktu tiap soal otomatis menyesuaikan level.</p>
+      <div class="stats">
+        <div class="stat"><b>40</b><span>soal</span></div>
+        <div class="stat"><b>10–30 dtk</b><span>waktu dasar / soal</span></div>
+        <div class="stat"><b>6</b><span>topik utama</span></div>
+      </div>
+      <p style="font-size:14px">Mode latihan: satu soal per layar • feedback langsung • pembahasan • analisis performa akhir • opsi tambahan waktu.</p>
+    </div>
+    <div class="card startbox">
+      <h3>Siap mulai?</h3>
+      <p style="color:var(--muted);font-size:14px">Masukkan nama siswa. Skor terbaik disimpan pada browser ini.</p>
+      <input id="studentName" class="name" placeholder="Nama siswa..." autocomplete="off" />
+      <div style="height:12px"></div>
+      <label for="extraTime" style="display:block;color:var(--muted);font-size:13px;margin-bottom:6px">Tambahan waktu otomatis untuk setiap soal</label>
+      <select id="extraTime" class="name" style="appearance:auto">
+        <option value="0">Normal — tanpa tambahan</option>
+        <option value="5">+5 detik per soal</option>
+        <option value="10">+10 detik per soal</option>
+        <option value="15">+15 detik per soal</option>
+      </select>
+      <div style="height:8px"></div>
+      <p style="color:var(--muted);font-size:12px;margin:0">Saat kuis berjalan, tersedia juga tombol <b>+10 detik</b> yang dapat dipakai 1 kali pada setiap soal.</p>
+      <div style="height:14px"></div>
+      <button class="btn primary" style="width:100%" onclick="startQuiz()">Mulai Kuis 🚀</button>
+      <div style="height:14px"></div>
+      <div class="pill">🎯 Target: ≥ 80% akurasi</div>
+    </div>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="quiz-top">
+      <div class="progressWrap card">
+        <div class="progressMeta"><span id="studentLabel">Siswa</span><span id="progressText">Soal 1 / 40</span></div>
+        <div class="bar"><div id="progressBar"></div></div>
+      </div>
+      <div id="timer" class="timer"><div><span id="timerText">20</span><small>DETIK</small></div></div>
+    </div>
+    <div class="quiz-grid">
+      <aside class="card map"><h4>Peta Soal</h4><div id="qmap" class="qmap"></div></aside>
+      <main class="card question">
+        <div class="qhead"><div><div id="topic" class="topic"></div><div id="qnum" style="color:var(--muted);font-size:12px;margin-top:4px"></div></div><div id="level" class="level"></div></div>
+        <div id="qtext" class="qtext"></div>
+        <div id="visual" class="visual hidden"></div>
+        <div id="options" class="options"></div>
+        <div class="actions">
+          <button id="checkBtn" class="btn primary" onclick="checkAnswer()">Cek Jawaban</button>
+          <button id="addTimeBtn" class="btn warn" onclick="addTime()">⏱ +10 detik</button>
+          <button id="nextBtn" class="btn success hidden" onclick="nextQuestion()">Soal Berikutnya →</button>
+        </div>
+        <div id="feedback" class="feedback hidden"></div>
+      </main>
+    </div>
+  </section>
+
+  <section id="result" class="card result hidden"></section>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const questions = [
+{topic:'Konsep Rasio',level:'Easy',time:10,q:'Sederhanakan rasio 12 : 18.',opts:['2 : 3','3 : 2','6 : 9','4 : 5'],ans:[0],exp:'FPB dari 12 dan 18 adalah 6. Maka 12÷6 : 18÷6 = 2 : 3.',visual:{type:'bars',a:2,b:3}},
+{topic:'Konsep Rasio',level:'Easy',time:10,q:'Manakah rasio yang ekuivalen dengan 4 : 7?',opts:['12 : 20','16 : 21','20 : 35','28 : 42'],ans:[2],exp:'Kalikan kedua suku dengan bilangan yang sama: 4×5 : 7×5 = 20 : 35.'},
+{topic:'Konsep Rasio',level:'Easy',time:10,q:'Pernyataan yang tepat tentang rasio adalah ...',opts:['Rasio selalu menunjukkan selisih dua nilai','Rasio membandingkan dua besaran dengan pembagian','Rasio hanya dapat ditulis sebagai pecahan','Rasio tidak dapat disederhanakan'],ans:[1],exp:'Rasio adalah perbandingan dua besaran melalui pembagian. Bentuknya dapat a:b, a/b, atau “a terhadap b”.'},
+{topic:'Soal Cerita',level:'Medium',time:15,q:'Dalam satu kelas terdapat 18 siswa laki-laki dan 24 siswa perempuan. Rasio laki-laki : perempuan dalam bentuk paling sederhana adalah ...',opts:['3 : 4','4 : 3','18 : 42','6 : 7'],ans:[0],exp:'18 : 24 disederhanakan dengan membagi 6 → 3 : 4.',visual:{type:'bars',a:3,b:4}},
+{topic:'Senilai',level:'Medium',time:15,q:'Harga 3 buku tulis adalah Rp18.000. Jika harga per buku tetap, harga 7 buku adalah ...',opts:['Rp36.000','Rp42.000','Rp48.000','Rp54.000'],ans:[1],exp:'Harga 1 buku = 18.000÷3 = 6.000. Harga 7 buku = 7×6.000 = Rp42.000.',visual:{type:'table',rows:[['Buku','3','7'],['Harga','18.000','?']]}},
+{topic:'Senilai',level:'Medium',time:20,q:'Tiga liter cat dapat menutupi 24 m² dinding. Dengan kualitas cat yang sama, 7,5 liter dapat menutupi ...',opts:['48 m²','54 m²','60 m²','72 m²'],ans:[2],exp:'24÷3 = 8 m² per liter. Maka 7,5×8 = 60 m².'},
+{topic:'Berbalik Nilai',level:'Medium',time:20,q:'Enam pekerja menyelesaikan pekerjaan dalam 15 hari. Dengan produktivitas sama, 10 pekerja memerlukan ...',opts:['6 hari','9 hari','12 hari','25 hari'],ans:[1],exp:'Jumlah pekerja × hari tetap: 6×15 = 10×t, sehingga t = 9 hari.',visual:{type:'arrows',text:'pekerja ↑  →  waktu ↓'}},
+{topic:'Berbalik Nilai',level:'Easy',time:10,q:'Situasi manakah yang paling tepat merupakan perbandingan berbalik nilai?',opts:['Banyak barang dan total harga','Kecepatan tetap dan jarak tempuh','Jumlah pekerja dan waktu untuk pekerjaan yang sama','Sisi persegi dan kelilingnya'],ans:[2],exp:'Untuk pekerjaan yang sama, semakin banyak pekerja, waktu yang diperlukan semakin sedikit.'},
+{topic:'Berbalik Nilai',level:'Medium',time:20,q:'Empat keran identik mengisi bak dalam 18 menit. Jika 6 keran identik digunakan bersamaan, waktu yang diperlukan adalah ...',opts:['9 menit','12 menit','15 menit','27 menit'],ans:[1],exp:'4×18 = 6×t → t = 72÷6 = 12 menit.'},
+{topic:'Skala',level:'Medium',time:15,q:'Skala peta 1 : 250.000 berarti 1 cm pada peta mewakili ...',opts:['250 m','2,5 km','25 km','250 km'],ans:[1],exp:'250.000 cm = 2.500 m = 2,5 km.',visual:{type:'scale',left:'1 cm',right:'2,5 km'}},
+{topic:'Skala',level:'Medium',time:20,q:'Jarak dua kota pada peta 7,2 cm. Jika skala 1 : 50.000, jarak sebenarnya adalah ...',opts:['3,6 km','36 km','360 m','7,2 km'],ans:[0],exp:'7,2×50.000 = 360.000 cm = 3,6 km.'},
+{topic:'Skala',level:'Medium',time:20,q:'Jarak sebenarnya 18 km. Pada peta berskala 1 : 300.000, jaraknya adalah ...',opts:['3 cm','6 cm','9 cm','12 cm'],ans:[1],exp:'18 km = 1.800.000 cm. Jarak peta = 1.800.000÷300.000 = 6 cm.'},
+{topic:'Laju Satuan',level:'Easy',time:10,q:'Sebuah mobil menempuh 180 km dalam 3 jam. Laju satuannya adalah ...',opts:['45 km/jam','60 km/jam','90 km/jam','540 km/jam'],ans:[1],exp:'Laju satuan = 180÷3 = 60 km/jam.'},
+{topic:'Laju Satuan',level:'Medium',time:15,q:'Lima paket makanan berharga Rp62.500. Harga per paket adalah ...',opts:['Rp10.500','Rp12.000','Rp12.500','Rp15.000'],ans:[2],exp:'62.500÷5 = Rp12.500 per paket.'},
+{topic:'Laju Satuan',level:'Medium',time:20,q:'Sebuah pompa mengalirkan 18 liter air dalam 45 detik. Laju aliran dalam liter per menit adalah ...',opts:['18 L/menit','20 L/menit','24 L/menit','27 L/menit'],ans:[2],exp:'18÷45 = 0,4 L/detik. Dalam 60 detik: 0,4×60 = 24 L/menit.'},
+{topic:'Laju Satuan',level:'Hard',time:20,q:'Kecepatan 72 km/jam sama dengan ... m/s.',opts:['15','18','20','25'],ans:[2],exp:'72 km/jam = 72×1000÷3600 = 20 m/s.'},
+{topic:'Senilai',level:'Medium',time:15,q:'Tabel berikut menunjukkan perbandingan senilai. Nilai x adalah ...',opts:['42','45','48','54'],ans:[2],exp:'30÷5 = 6. Jadi x = 8×6 = 48.',visual:{type:'table',rows:[['A','5','8'],['B','30','x']]}},
+{topic:'Berbalik Nilai',level:'Medium',time:20,q:'Pada tabel berbalik nilai berikut, nilai y adalah ...',opts:['10','12','14','27'],ans:[1],exp:'Untuk berbalik nilai, hasil kali tetap: 4×18 = 6×y → y = 12.',visual:{type:'table',rows:[['x','4','6'],['y','18','?']]}},
+{topic:'TKA Style',level:'Hard',time:25,type:'multi',q:'Diketahui A : B = 2 : 3 dan B : C = 4 : 5. Pilih SEMUA pernyataan yang benar.',opts:['A : B : C = 8 : 12 : 15','A : C = 8 : 15','Jika C = 45 maka A = 24','Jika A+B+C = 70 maka C = 25'],ans:[0,1,2],exp:'Samakan bagian B: 2:3 dikali 4 menjadi 8:12, sedangkan 4:5 dikali 3 menjadi 12:15. Jadi A:B:C = 8:12:15. Jika C=45, faktor 3 → A=24. Total bagian 35; jika total 70, C=30, bukan 25.'},
+{topic:'TKA Style',level:'Hard',time:25,type:'multi',q:'Sebuah peta berskala 1 : 200.000. Pilih SEMUA pernyataan yang benar.',opts:['1 cm mewakili 2 km','3,5 cm mewakili 7 km','Jarak sebenarnya 12 km digambar 6 cm','Jika skala menjadi 1 : 400.000, gambar untuk jarak yang sama menjadi dua kali lebih panjang'],ans:[0,1,2],exp:'1 cm = 2 km. Maka 3,5 cm = 7 km dan 12 km = 6 cm. Skala 1:400.000 membuat gambar justru setengah panjang untuk jarak nyata yang sama.'},
+{topic:'TKA Style',level:'Hard',time:25,type:'multi',q:'Sebuah kendaraan bergerak dengan kecepatan tetap 54 km/jam. Pilih SEMUA pernyataan yang benar.',opts:['Kecepatannya 15 m/s','Dalam 20 menit menempuh 18 km','Jarak 27 km ditempuh dalam 30 menit','Dalam 10 detik menempuh 180 m'],ans:[0,1,2],exp:'54 km/jam = 15 m/s. Dalam 20 menit = 1/3 jam → 18 km. 27 km ÷ 54 = 0,5 jam. Dalam 10 detik = 150 m, bukan 180 m.'},
+{topic:'Soal Cerita',level:'Hard',time:25,q:'Campuran sirup memiliki rasio konsentrat : air = 2 : 5 dan total volumenya 21 liter. Setelah ditambah 6 liter air, rasio baru konsentrat : air adalah ...',opts:['1 : 3','2 : 7','3 : 7','6 : 21'],ans:[1],exp:'Awal: 7 bagian = 21 L → 1 bagian = 3 L. Konsentrat = 6 L, air = 15 L. Tambah 6 L air → 21 L. Rasio 6:21 = 2:7.'},
+{topic:'OSN Style',level:'Hard',time:30,q:'Dua belas pekerja dapat menyelesaikan sebuah proyek dalam 18 hari. Setelah bekerja 6 hari, 4 pekerja berhenti. Berapa hari LAGI yang diperlukan 8 pekerja tersisa untuk menyelesaikan proyek?',opts:['12 hari','15 hari','18 hari','24 hari'],ans:[2],exp:'Total pekerjaan = 12×18 = 216 hari-pekerja. Dalam 6 hari terselesaikan 12×6 = 72. Sisa 144. Dengan 8 pekerja: 144÷8 = 18 hari lagi.'},
+{topic:'OSN Style',level:'Hard',time:30,q:'Diketahui A : B = 3 : 5 dan B : C = 10 : 7. Jika A + C = 65, nilai B adalah ...',opts:['35','40','45','50'],ans:[3],exp:'Samakan B: A:B = 6:10 dan B:C = 10:7, jadi A:B:C = 6:10:7. A+C = 13 bagian = 65 → 1 bagian = 5. Maka B = 10×5 = 50.'},
+{topic:'OSN Style',level:'Hard',time:30,q:'Pada peta berskala 1 : 250.000, panjang rute adalah 8 cm. Seorang pesepeda menempuh rute itu dengan kecepatan rata-rata 16 km/jam. Waktu tempuhnya adalah ...',opts:['60 menit','70 menit','75 menit','80 menit'],ans:[2],exp:'Jarak nyata = 8×250.000 cm = 20 km. Waktu = 20÷16 jam = 1,25 jam = 75 menit.',visual:{type:'scale',left:'8 cm',right:'? km → waktu?'}},
+{topic:'Konsep Rasio',level:'Medium',time:15,q:'Rasio 0,6 : 1,5 dalam bentuk paling sederhana adalah ...',opts:['2 : 5','3 : 5','5 : 2','6 : 15'],ans:[0],exp:'Kalikan keduanya dengan 10 → 6 : 15. Sederhanakan dengan membagi 3 → 2 : 5.'},
+{topic:'Konsep Rasio',level:'Medium',time:15,q:'Jika 40% dari suatu kelompok adalah siswa kelas A, rasio kelas A : bukan kelas A adalah ...',opts:['2 : 3','3 : 2','4 : 5','5 : 4'],ans:[0],exp:'40% : 60% = 40 : 60 = 2 : 3.'},
+{topic:'Soal Cerita',level:'Medium',time:20,q:'Resep minuman menggunakan sirup : air = 3 : 8. Jika digunakan 12 gelas sirup, banyak air yang diperlukan adalah ...',opts:['24 gelas','28 gelas','32 gelas','36 gelas'],ans:[2],exp:'3 bagian menjadi 12, berarti dikali 4. Air = 8×4 = 32 gelas.',visual:{type:'bars',a:3,b:8}},
+{topic:'Soal Cerita',level:'Hard',time:25,q:'Uang Raka dan Dimas berbanding 5 : 7. Setelah Raka mendapat Rp10.000, rasio uang mereka menjadi 3 : 4. Jika uang Dimas tidak berubah, uang Raka mula-mula adalah ...',opts:['Rp160.000','Rp180.000','Rp200.000','Rp240.000'],ans:[2],exp:'Misal awal Raka=5k dan Dimas=7k. Setelah ditambah 10.000: (5k+10.000)/(7k)=3/4. Maka 20k+40.000=21k → k=40.000. Uang Raka mula-mula = 5k = Rp200.000.'},
+{topic:'Senilai',level:'Medium',time:20,q:'Untuk membuat 18 roti diperlukan 450 gram tepung. Dengan resep yang sama, tepung untuk 30 roti adalah ...',opts:['650 g','700 g','750 g','800 g'],ans:[2],exp:'Tepung per roti = 450÷18 = 25 g. Untuk 30 roti: 30×25 = 750 g.',visual:{type:'table',rows:[['Roti','18','30'],['Tepung','450 g','?']]}},
+{topic:'Senilai',level:'Hard',time:25,q:'Sebuah printer mencetak 84 halaman dalam 6 menit. Dengan laju tetap, berapa halaman yang tercetak dalam 17,5 menit?',opts:['224','238','245','252'],ans:[2],exp:'Laju = 84÷6 = 14 halaman/menit. Dalam 17,5 menit: 14×17,5 = 245 halaman.'},
+{topic:'Berbalik Nilai',level:'Medium',time:20,q:'Sebuah perjalanan memerlukan 5 jam dengan kecepatan rata-rata 72 km/jam. Jika jaraknya sama dan kecepatan menjadi 90 km/jam, waktu yang diperlukan adalah ...',opts:['3 jam','4 jam','4,5 jam','6,25 jam'],ans:[1],exp:'Jarak tetap, jadi kecepatan × waktu tetap: 72×5 = 90×t → t = 4 jam.',visual:{type:'arrows',text:'kecepatan ↑  →  waktu ↓'}},
+{topic:'Berbalik Nilai',level:'Hard',time:25,q:'Delapan mesin identik menyelesaikan pesanan dalam 15 jam. Setelah bekerja 5 jam, dua mesin rusak. Berapa jam LAGI yang diperlukan enam mesin tersisa?',opts:['10 jam','12 jam','13⅓ jam','15 jam'],ans:[2],exp:'Total pekerjaan = 8×15 = 120 mesin-jam. Sudah dikerjakan 8×5 = 40. Sisa 80. Dengan 6 mesin: 80÷6 = 13⅓ jam lagi.'},
+{topic:'Skala',level:'Medium',time:20,q:'Sebuah denah berskala 1 : 150. Panjang ruang pada denah 8 cm dan lebarnya 6 cm. Luas ruang sebenarnya adalah ...',opts:['72 m²','108 m²','120 m²','135 m²'],ans:[1],exp:'Panjang nyata = 8×150 cm = 12 m. Lebar = 6×150 cm = 9 m. Luas = 12×9 = 108 m².',visual:{type:'scale',left:'8 cm × 6 cm',right:'? m²'}},
+{topic:'Skala',level:'Hard',time:25,q:'Sebuah model mobil memiliki panjang 18 cm pada skala 1 : 25. Jika dibuat model baru dengan skala 1 : 15, panjang model baru adalah ...',opts:['24 cm','27 cm','30 cm','36 cm'],ans:[2],exp:'Panjang sebenarnya = 18×25 = 450 cm. Pada skala 1:15, panjang model = 450÷15 = 30 cm.'},
+{topic:'Laju Satuan',level:'Medium',time:20,q:'Paket A berisi 8 botol seharga Rp68.000 dan Paket B berisi 12 botol seharga Rp96.000. Paket yang lebih murah per botol adalah ...',opts:['Paket A, selisih Rp500/botol','Paket A, selisih Rp1.000/botol','Paket B, selisih Rp500/botol','Paket B, selisih Rp1.000/botol'],ans:[2],exp:'A = 68.000÷8 = 8.500/botol. B = 96.000÷12 = 8.000/botol. Paket B lebih murah Rp500 per botol.'},
+{topic:'Laju Satuan',level:'Hard',time:25,q:'Sebuah kereta menempuh 210 km dalam 2 jam 20 menit. Kecepatan rata-ratanya adalah ...',opts:['80 km/jam','85 km/jam','90 km/jam','95 km/jam'],ans:[2],exp:'2 jam 20 menit = 7/3 jam. Kecepatan = 210 ÷ (7/3) = 210×3/7 = 90 km/jam.'},
+{topic:'TKA Style',level:'Hard',time:25,type:'multi',q:'Untuk campuran A : B = 3 : 5, pilih SEMUA pernyataan yang benar.',opts:['Jika A=12 maka B=20','Jika total campuran 64 maka A=24','Jika B bertambah 10 tanpa mengubah A, rasionya tetap 3:5','Persentase bagian A adalah 37,5%'],ans:[0,1,3],exp:'A:B=3:5. Jika A=12 faktor 4 → B=20. Total 8 bagian; total 64 → A=24. Menambah B saja mengubah rasio. Bagian A = 3/8 = 37,5%.'},
+{topic:'TKA Style',level:'Hard',time:25,type:'multi',q:'Sebuah pekerjaan dapat selesai oleh 15 pekerja dalam 12 hari. Pilih SEMUA kondisi yang secara teoritis menyelesaikan pekerjaan yang sama.',opts:['10 pekerja selama 18 hari','12 pekerja selama 15 hari','18 pekerja selama 10 hari','20 pekerja selama 8 hari'],ans:[0,1,2],exp:'Total beban kerja = 15×12 = 180 pekerja-hari. 10×18=180, 12×15=180, 18×10=180, sedangkan 20×8=160.'},
+{topic:'OSN Style',level:'Hard',time:30,q:'A : B = 2 : 3, B : C = 4 : 5, dan C : D = 10 : 9. Jika A + D = 86, nilai B + C adalah ...',opts:['96','102','108','114'],ans:[2],exp:'Samakan rasio: A:B=8:12 dan B:C=12:15. Karena C:D=10:9, kalikan seluruh rasio 2 agar C=30, sehingga A:B:C:D=16:24:30:27. A+D=43 bagian=86 → 1 bagian=2. Maka B+C=(24+30)×2=108.'}
+];
+
+let idx=0, selected=[], state=[], timerId=null, remaining=0, startedAt=0, name='Siswa', locked=false, extraTime=0, currentLimit=0;
+const byId=id=>document.getElementById(id);
+
+function startQuiz(){
+  name = byId('studentName').value.trim() || 'Siswa';
+  extraTime = Number(byId('extraTime').value || 0);
+  byId('start').classList.add('hidden'); byId('quiz').classList.remove('hidden');
+  byId('studentLabel').textContent=name;
+  state=questions.map(()=>({status:'pending',time:0,selected:[],bonusUsed:false,bonus:0}));
+  renderMap(); renderQuestion();
+}
+function renderMap(){
+  const m=byId('qmap'); m.innerHTML='';
+  questions.forEach((_,i)=>{const d=document.createElement('button'); d.className='qdot'; d.textContent=i+1; d.dataset.i=i; if(i===idx)d.classList.add('current'); const s=state[i]?.status; if(s==='correct')d.classList.add('correct'); if(s==='wrong')d.classList.add('wrong'); if(s==='unanswered')d.classList.add('unanswered'); d.onclick=()=>{ if(state[i].status!=='pending' || i===idx){ idx=i; clearInterval(timerId); renderQuestion(); }}; m.appendChild(d);});
+}
+function renderQuestion(){
+  locked = state[idx].status!=='pending'; selected=[...(state[idx].selected||[])];
+  const q=questions[idx];
+  byId('progressText').textContent=`Soal ${idx+1} / ${questions.length}`;
+  byId('progressBar').style.width=`${(idx/questions.length)*100}%`;
+  byId('topic').textContent=q.topic; byId('qnum').textContent=`Soal ${String(idx+1).padStart(2,'0')}`;
+  const effectiveTime=q.time+extraTime+(state[idx].bonus||0);
+  byId('level').textContent=`${q.level} · ${effectiveTime} detik`; byId('qtext').textContent=q.q;
+  renderVisual(q.visual); renderOptions(q); renderMap();
+  byId('feedback').classList.add('hidden'); byId('feedback').innerHTML='';
+  byId('checkBtn').classList.toggle('hidden',locked); byId('nextBtn').classList.toggle('hidden',!locked);
+  byId('addTimeBtn').classList.toggle('hidden',locked);
+  byId('addTimeBtn').disabled=!!state[idx].bonusUsed;
+  byId('addTimeBtn').textContent=state[idx].bonusUsed?'✓ +10 detik dipakai':'⏱ +10 detik';
+  if(locked) showExistingFeedback();
+  clearInterval(timerId); currentLimit=effectiveTime; remaining=effectiveTime; startedAt=Date.now(); updateTimer();
+  if(!locked) timerId=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerId);timeoutQuestion();}},1000);
+}
+function renderVisual(v){const el=byId('visual'); if(!v){el.classList.add('hidden'); el.innerHTML=''; return;} el.classList.remove('hidden');
+  if(v.type==='bars'){el.innerHTML=`<div style="display:flex;gap:24px;align-items:flex-end"><div><div class="ratio-bars">${'<span class="block" style="height:52px"></span>'.repeat(v.a)}</div><small>${v.a} bagian</small></div><b style="font-size:28px">:</b><div><div class="ratio-bars">${'<span class="block alt" style="height:68px"></span>'.repeat(v.b)}</div><small>${v.b} bagian</small></div></div>`;}
+  if(v.type==='table'){el.innerHTML=`<table class="vtable">${v.rows.map((r,i)=>`<tr>${r.map(c=>i===0?`<th>${c}</th>`:`<td>${c}</td>`).join('')}</tr>`).join('')}</table>`;}
+  if(v.type==='scale'){el.innerHTML=`<div class="scale-line"><b>${v.left}</b><div class="road"></div><b>${v.right}</b></div>`;}
+  if(v.type==='arrows'){el.innerHTML=`<div style="font-size:26px;text-align:center;font-weight:900;color:#9ed0ff">${v.text}</div>`;}
+}
+function renderOptions(q){const wrap=byId('options'); wrap.innerHTML=''; q.opts.forEach((o,i)=>{const b=document.createElement('button'); b.className='opt'; b.dataset.i=i; b.innerHTML=`<span class="badge">${String.fromCharCode(65+i)}</span><span>${o}</span>`; if(selected.includes(i))b.classList.add('selected'); b.onclick=()=>selectOption(i); wrap.appendChild(b);}); if(locked) colorOptions(q);}
+function selectOption(i){if(locked)return; const q=questions[idx]; if(q.type==='multi'){selected.includes(i)?selected=selected.filter(x=>x!==i):selected.push(i);} else selected=[i]; state[idx].selected=[...selected]; renderOptions(q);}
+function eqSet(a,b){return a.length===b.length && [...a].sort((x,y)=>x-y).every((v,i)=>v===[...b].sort((x,y)=>x-y)[i]);}
+function checkAnswer(auto=false){if(locked)return; if(!auto && selected.length===0){toast('Pilih jawaban terlebih dahulu.');return;} clearInterval(timerId); const q=questions[idx]; const elapsed=Math.min(currentLimit,Math.max(0,(Date.now()-startedAt)/1000)); const correct=eqSet(selected,q.ans); state[idx]={status:selected.length===0?'unanswered':(correct?'correct':'wrong'),time:elapsed,selected:[...selected]}; locked=true; colorOptions(q); showFeedback(q,correct,selected.length===0); byId('checkBtn').classList.add('hidden'); byId('nextBtn').classList.remove('hidden'); renderMap(); }
+function timeoutQuestion(){selected=[]; checkAnswer(true);}
+function colorOptions(q){[...byId('options').children].forEach((el,i)=>{el.classList.remove('selected'); if(q.ans.includes(i))el.classList.add('correct'); else if((state[idx].selected||[]).includes(i))el.classList.add('wrong');});}
+function showFeedback(q,correct,unanswered=false){const f=byId('feedback'); f.className='feedback '+(correct?'good':'bad'); f.classList.remove('hidden'); const head=unanswered?'⏱ Waktu habis':(correct?'✅ Benar!':'❌ Belum tepat'); const ansText=q.ans.map(i=>String.fromCharCode(65+i)+'. '+q.opts[i]).join(' • '); f.innerHTML=`<h4>${head}</h4><p>Jawaban benar: <b>${ansText}</b></p><div class="explain"><b>Pembahasan:</b><br>${q.exp}</div>`;}
+function showExistingFeedback(){const q=questions[idx],s=state[idx]; colorOptions(q); showFeedback(q,s.status==='correct',s.status==='unanswered');}
+function nextQuestion(){clearInterval(timerId); if(idx<questions.length-1){idx++;renderQuestion();} else finishQuiz();}
+function updateTimer(){byId('timerText').textContent=remaining; const p=Math.max(0,remaining/currentLimit*100); let color=p>50?'var(--green)':p>25?'var(--yellow)':'var(--red)'; byId('timer').style.background=`conic-gradient(${color} ${p}%, #223149 0)`;}
+function addTime(){
+  if(locked)return;
+  if(state[idx].bonusUsed){toast('Tambahan waktu untuk soal ini sudah dipakai.');return;}
+  state[idx].bonusUsed=true; state[idx].bonus=10;
+  remaining+=10; currentLimit+=10;
+  byId('level').textContent=`${questions[idx].level} · ${currentLimit} detik`;
+  byId('addTimeBtn').disabled=true; byId('addTimeBtn').textContent='✓ +10 detik dipakai';
+  updateTimer(); toast('Tambahan 10 detik aktif!');
+}
+function finishQuiz(){byId('quiz').classList.add('hidden'); const res=byId('result'); res.classList.remove('hidden'); const correct=state.filter(s=>s.status==='correct').length, wrong=state.filter(s=>s.status==='wrong').length, blank=state.filter(s=>s.status==='unanswered').length; const score=Math.round(correct/questions.length*100); const times=state.filter(s=>s.status!=='pending').map(s=>s.time); const avg=times.length?(times.reduce((a,b)=>a+b,0)/times.length):0; const bestKey='ratioRushBest'; const best=Math.max(Number(localStorage.getItem(bestKey)||0),score); localStorage.setItem(bestKey,best);
+  const topics={}; questions.forEach((q,i)=>{topics[q.topic]??={ok:0,total:0}; topics[q.topic].total++; if(state[i].status==='correct')topics[q.topic].ok++;});
+  const rows=Object.entries(topics).map(([t,v])=>{const p=Math.round(v.ok/v.total*100);return `<div class="topicRow"><span>${t}</span><div class="miniBar"><i style="width:${p}%"></i></div><b>${p}%</b></div>`}).join('');
+  const review=questions.map((q,i)=>`<div class="reviewItem"><b>${i+1}. ${q.q}</b><small>Status: ${state[i].status==='correct'?'Benar':state[i].status==='wrong'?'Salah':'Tidak dijawab'} · Jawaban benar: ${q.ans.map(a=>q.opts[a]).join(', ')}<br>${q.exp}</small></div>`).join('');
+  res.innerHTML=`<div style="display:grid;grid-template-columns:1fr 200px;gap:24px;align-items:center"><div><span class="pill">🏁 Selesai</span><h2>Kerja bagus, ${name}!</h2><p style="color:var(--muted)">Berikut ringkasan performa review rasio.</p></div><div class="scoreRing" style="background:conic-gradient(var(--green) ${score}%,#1c2c43 0)"><div><b>${score}</b><small>/100</small></div></div></div>
+  <div class="scoreGrid"><div class="scoreCard"><b>${correct}</b><span>Benar</span></div><div class="scoreCard"><b>${wrong}</b><span>Salah</span></div><div class="scoreCard"><b>${blank}</b><span>Tidak dijawab</span></div><div class="scoreCard"><b>${avg.toFixed(1)} dtk</b><span>Rata-rata waktu</span></div></div>
+  <div class="card" style="padding:20px"><h3>Analisis per Topik</h3><div class="topicRows">${rows}</div></div>
+  <p style="color:var(--muted);margin-top:18px">Skor terbaik di browser ini: <b style="color:#fff">${best}</b>. Target penguasaan disarankan ≥ 80%.</p>
+  <div class="actions"><button class="btn primary" onclick="location.reload()">Kerjakan Ulang</button><button class="btn secondary" onclick="toggleReview()">Lihat Semua Pembahasan</button></div>
+  <div id="fullReview" class="review hidden"><h3>Review & Pembahasan Lengkap</h3>${review}</div>`;
+}
+function toggleReview(){byId('fullReview').classList.toggle('hidden');}
+function toast(msg){const t=byId('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
+</script>
+</body>
+</html>
